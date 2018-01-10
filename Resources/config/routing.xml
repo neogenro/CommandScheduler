@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="command_scheduler_list" path="/command-list">
+        <default key="_controller">CommandSchedulerBundle:CommandScheduler:index</default>
+    </route>
+    <route id="command_scheduler_add" path="/add-new-command">
+        <default key="_controller">CommandSchedulerBundle:CommandScheduler:add</default>
+    </route>
+    <route id="command_scheduler_edit" path="/edit-command/{id}">
+        <default key="_controller">CommandSchedulerBundle:CommandScheduler:edit</default>
+        <default key="id">0</default>
+    </route>
+    <route id="command_scheduler_unlock_command" path="/unlock-command/{id}">
+        <default key="_controller">CommandSchedulerBundle:CommandScheduler:unlockCommand</default>
+        <default key="id">0</default>
+    </route>
+    <route id="command_scheduler_remove" path="/remove-command/{id}">
+        <default key="_controller">CommandSchedulerBundle:CommandScheduler:remove</default>
+        <default key="id">0</default>
+    </route>
+</routes>

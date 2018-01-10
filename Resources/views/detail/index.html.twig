@@ -1,0 +1,35 @@
+{% extends "@CommandSchedulerBundle/layout.html.twig" %}
+
+{% block title %}
+    {{ 'Commands'|trans }}
+{% endblock title %}
+
+{% block content %}
+
+    {% set styleConfiguration = {'class': 'form-control'} %}
+    <div class="col-lg-6 col-sm-12">
+        {{ form_start( scheduledCommandForm ) }}
+
+        {# Form's fields #}
+        {{ form_row( scheduledCommandForm.name, {'attr': styleConfiguration|merge({'placeholder': 'name'}) } ) }}
+        {{ form_row( scheduledCommandForm.command, {'attr': styleConfiguration } ) }}
+        {{ form_row( scheduledCommandForm.arguments, {'attr': styleConfiguration|merge({'placeholder': '--argument1=foo --bar'}) } ) }}
+        {{ form_row( scheduledCommandForm.cronExpression, {'attr': styleConfiguration|merge({'placeholder': '*/10 * * * *'}) } ) }}
+        {{ form_row( scheduledCommandForm.priority, {'attr': styleConfiguration } ) }}
+        <div>
+            {{ form_widget( scheduledCommandForm.executeNow ) }}
+            {{ form_label( scheduledCommandForm.executeNow ) }}
+        </div>
+        <div>
+            {{ form_widget( scheduledCommandForm.disabled ) }}
+            {{ form_label( scheduledCommandForm.disabled ) }}
+        </div>
+
+        {# Form's actions #}
+        <div class="row">
+            <a href="{{ path('command_scheduler_list') }}" class="btn btn-default btn-lg" role="button">Cancel</a>
+            <button class="btn btn-success btn-lg" role="button" >Save</button>
+        </div>
+        {{ form_end( scheduledCommandForm ) }}
+    </div>
+{% endblock content %}

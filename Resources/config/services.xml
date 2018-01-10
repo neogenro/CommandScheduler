@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="false" />
+        <service id="Neogen\CommandSchedulerBundle\Command\ExecuteCommand">
+            <argument key="$environment">'%kernel.environment%'</argument>
+            <tag name="console.command" />
+        </service>
+        <service id="Neogen\CommandSchedulerBundle\Service\CommandGetter" class="Neogen\CommandSchedulerBundle\Service\CommandGetter">
+        </service>
+        <service id="Neogen\CommandSchedulerBundle\Form\CommandEntityType" class="Neogen\CommandSchedulerBundle\Form\CommandEntityType">
+            <argument type="service" id="Neogen\CommandSchedulerBundle\Service\CommandGetter" />
+            <tag name="form.type"/>
+        </service>
+    </services>
+</container>

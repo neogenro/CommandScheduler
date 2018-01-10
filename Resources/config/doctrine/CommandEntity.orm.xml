@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Neogen\CommandSchedulerBundle\Repository\CommandEntityRepository" name="Neogen\CommandSchedulerBundle\Entity\CommandEntity" table="command_entity">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="name" type="string" column="name" length="255"/>
+    <field name="command" type="string" column="command" length="255"/>
+    <field name="arguments" type="string" column="arguments" length="255" nullable="true"/>
+    <field name="cronExpression" type="string" column="cron_expression" length="20"/>
+    <field name="priority" type="integer" column="priority"/>
+    <field name="executeNow" type="boolean" column="execute_now"/>
+    <field name="disabled" type="boolean" column="disabled"/>
+    <field name="locked" type="boolean" column="locked"/>
+    <field name="lastExecution" type="datetime" column="last_execution" nullable="true"/>
+    <field name="lastReturnCode" type="integer" column="last_return_code" nullable="true"/>
+    <field name="lastRunDuration" type="integer" column="last_run_duration" nullable="true"/>
+    <field name="lastLog" type="text" column="last_log" nullable="true"/>
+  </entity>
+</doctrine-mapping>
