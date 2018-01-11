@@ -19,7 +19,7 @@ class CommandSchedulerController extends Controller
     {
         $scheduledCommands = $this->getDoctrine()->getManager()->getRepository(CommandEntity::class)->findAll();
 
-        return $this->render('@CommandSchedulerBundle/list/index.html.twig', [
+        return $this->render('@CommandScheduler/list/index.html.twig', [
             'scheduledCommands' => $scheduledCommands
         ]);
     }
@@ -42,7 +42,7 @@ class CommandSchedulerController extends Controller
             return new RedirectResponse($this->generateUrl('command_scheduler_list'));
         }
 
-        return $this->render('@CommandSchedulerBundle/detail/index.html.twig', [
+        return $this->render('@CommandScheduler/detail/index.html.twig', [
             'scheduledCommandForm' => $form->createView()
         ]);
     }
@@ -64,7 +64,7 @@ class CommandSchedulerController extends Controller
             return new RedirectResponse($this->generateUrl('command_scheduler_list'));
         }
 
-        return $this->render('@CommandSchedulerBundle/detail/index.html.twig', [
+        return $this->render('@CommandScheduler/detail/index.html.twig', [
             'scheduledCommandForm' => $form->createView()
         ]);
     }
