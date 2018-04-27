@@ -10,8 +10,7 @@
 namespace Neogen\CommandSchedulerBundle\Service;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Descriptor\XmlDescriptor;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class CommandGetter
@@ -61,9 +60,9 @@ class CommandGetter
             $namespaceId = (string)$namespace->attributes()->id;
 
             //if (!in_array($namespaceId, $this->excludedNamespaces)) {
-                foreach ($namespace->command as $command) {
-                    $commandsList[$namespaceId][(string)$command] = (string)$command;
-                }
+            foreach ($namespace->command as $command) {
+                $commandsList[$namespaceId][(string)$command] = (string)$command;
+            }
             //}
         }
 
