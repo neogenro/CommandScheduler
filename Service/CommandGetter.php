@@ -18,12 +18,15 @@ class CommandGetter
 {
     /** @var KernelInterface */
     private $kernel;
+    /** @var  XmlDescriptor */
+    private $descriptor;
     /**
      * @param KernelInterface $kernel
      */
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+        $this->descriptor = new XmlDescriptor();
     }
 
     /**
@@ -34,18 +37,9 @@ class CommandGetter
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
 
-        $input = new ArrayInput(
-            array(
-                'command' => 'list',
-                '--format' => 'xml'
-            )
-        );
+        $xmlResponse = $this->descriptor->getApplicationDocument($application);
 
-        $output = new StreamOutput(fopen('php://memory', 'w+'));
-        $application->run($input, $output);
-        rewind($output->getStream());
-
-        return $this->extractCommandsFromXML(stream_get_contents($output->getStream()));
+        return $this->extractCommandsFromXML($xmlResponse->saveXML());
     }
 
     /**
