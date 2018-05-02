@@ -77,7 +77,7 @@ class ExecuteCommand extends Command
 
         $this->em->clear();
 
-        return 1;
+        return 0;
     }
 
     /**
@@ -148,7 +148,7 @@ class ExecuteCommand extends Command
                 ->findOneBy(['id' => $scheduledCommand, 'locked' => false]);
             if ($notLockedCommand === null) {
                 $this->output->writeln(['<info>The command: '.$scheduledCommand->getCommand().' is not found!</info>']);
-                return -1;
+                return 1;
             }
 
             /** @var CommandEntity $scheduledCommand */
@@ -164,7 +164,7 @@ class ExecuteCommand extends Command
             $this->output->writeln([sprintf('<cerror>Command with id: %s is locked %s</cerror>',
                 $scheduledCommand->getId(),
                 (!empty($e->getMessage()) ? sprintf('(%s)', $e->getMessage()) : ''))]);
-            return -1;
+            return 1;
         }
         try {
             $command = $this->getApplication()->find($scheduledCommand->getCommand());
@@ -174,7 +174,7 @@ class ExecuteCommand extends Command
 
             $this->em->merge($scheduledCommand);
             $this->em->flush();
-            return -1;
+            return 1;
         }
 
         $input = $scheduledCommand->getCommand().' '. $scheduledCommand->getArguments().' --env='.$this->environment;
@@ -204,6 +204,6 @@ class ExecuteCommand extends Command
         $process = new Process($cmd);
         $process->start();
         $this->processes[] = new ProcessModel($scheduledCommand, $process);
-        return 1;
+        return 0;
     }
 }
